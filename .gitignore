@@ -1,0 +1,53 @@
+# Editors / IDEs
+.vscode/
+.claude/
+.idea/
+*.swp
+*.swo
+*~
+*.sublime-project
+*.sublime-workspace
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Environment / secrets
+.env
+.env.local
+.env.*.local
+*.pem
+
+# Skill build artifacts (generated from skill folders; never a source of truth)
+*.skill
+
+# Build output
+dist/
+build/
+out/
+.cache/
+tmp/
+temp/
+
+# Misc
+.DS_Store
+coverage/
