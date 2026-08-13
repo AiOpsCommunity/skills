@@ -14,6 +14,7 @@ binary to keep in sync.
 
 | Skill | Description |
 | :---- | :---------- |
+| [`adr`](skills/adr/SKILL.md) | Write, update and supersede Architecture Decision Records (ADRs) in MADR or Nygard format, and keep the decision log consistent over time. |
 | [`aiops-community-proposal`](skills/aiops-community-proposal/SKILL.md) | Draft a client proposal on behalf of an individual IT professional responding to an assignment found via the AiOps Community, in a plain, honest, non-salesy house style. |
 | [`changelog`](skills/changelog/SKILL.md) | Write and maintain CHANGELOG.md entries and release notes from git history, staged diffs, or a described set of changes, using Keep a Changelog categories and semantic versioning. |
 
