@@ -3,6 +3,24 @@
 Each skill is a folder under `skills/` with one `SKILL.md` inside. That folder is the single
 source of truth. See [README.md](README.md) for install and full authoring details.
 
+## One-time setup
+
+Run `npm install` once after cloning. It installs the tooling and enables a
+local Git hook that checks your commit messages.
+
+## Commit messages
+
+This repo uses [Conventional Commits](https://www.conventionalcommits.org). The
+message format decides the next version number, so it matters:
+
+- `feat: ...` — a new skill or capability (minor release)
+- `fix: ...` — a correction to an existing skill (patch release)
+- `docs: ...`, `chore: ...`, `refactor: ...` — no release on their own
+- a `!` after the type or a `BREAKING CHANGE:` footer — major release
+
+Example: `feat(adr): support Nygard format`. The hook (and CI) will reject
+anything that doesn't match.
+
 ## Adding or editing a skill
 
 - **One skill per pull request.**
