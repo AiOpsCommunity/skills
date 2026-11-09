@@ -1,0 +1,62 @@
+name: PR checks
+
+# Runs on every pull request, and on main so the check names show up in the
+# ruleset picker and main is never left broken.
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  structure:
+    name: structure
+    runs-on: ubuntu-latest
+    steps:
+      # Pinned to a SHA rather than a tag, as in AiOpsCommunity/hooks.
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: validate.sh
+        run: ./scripts/validate.sh
+
+  lint:
+    name: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: shellcheck
+        run: |
+          mapfile -t files < <(git ls-files '*.sh')
+          if [ ${#files[@]} -eq 0 ]; then echo "no shell scripts"; exit 0; fi
+          printf 'checking: %s\n' "${files[@]}"
+          shellcheck --severity=warning "${files[@]}"
+
+      - name: json formatting
+        run: |
+          mapfile -t files < <(git ls-files '*.json')
+          for f in "${files[@]}"; do
+            python3 -m json.tool "$f" > /dev/null || { echo "invalid JSON: $f"; exit 1; }
+          done
+          echo "all JSON parses"
+
+  plugin-validate:
+    name: plugin-validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: install Claude Code
+        run: npm install -g @anthropic-ai/claude-code
+
+      # Only the marketplace. Each skill folder is installed as a plugin without
+      # a plugin.json, which works, but `claude plugin validate` on the folder
+      # itself reports "No manifest found".
+      - name: validate the marketplace manifest
+        run: claude plugin validate .

@@ -114,8 +114,12 @@ path without publishing, run `/plugin marketplace add ./` from the repo root.
 ├── CONTRIBUTING.md
 ├── .claude-plugin/
 │   └── marketplace.json         # plugin catalog for /plugin install
+├── .github/
+│   └── workflows/
+│       └── pr-checks.yml        # runs validate.sh, shellcheck and claude plugin validate
 ├── scripts/
-│   └── build-skill.sh           # folder -> dist/<name>.skill (for claude.ai upload)
+│   ├── build-skill.sh           # folder -> dist/<name>.skill (for claude.ai upload)
+│   └── validate.sh              # structure: registration, frontmatter, links
 └── skills/
     └── <skill-name>/
         └── SKILL.md             # the skill (single source of truth)

@@ -25,7 +25,10 @@ source of truth. See [README.md](README.md) for install and full authoring detai
 
 ## Before opening a PR
 
-- `python3 -m json.tool .claude-plugin/marketplace.json` — confirm the catalog is valid JSON.
+- `./scripts/validate.sh`: the catalog is valid JSON, every skill is registered in
+  `marketplace.json` and the README, its frontmatter matches its folder, and its links resolve.
+  CI runs the same script on every pull request, together with `shellcheck` and
+  `claude plugin validate .`.
 - Test the skill locally: copy the folder into a project's `.claude/skills/`, then invoke
   `/skill-name` (or ask a matching question) and confirm it triggers. `claude --debug` shows
   frontmatter parse errors.

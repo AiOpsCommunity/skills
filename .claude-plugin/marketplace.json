@@ -1,5 +1,6 @@
 {
   "name": "aiops-skills",
+  "description": "Claude skills shared by the AiOps Community: proposals, architecture decision records, changelogs and more, each installable on its own.",
   "owner": {
     "name": "AiOps Community"
   },
